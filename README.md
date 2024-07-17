@@ -4,7 +4,7 @@
  
 **Run the following commmands**
 
-**create a virtual machine**
+**Create a virtual machine**
 ```bash 
 virtualenv .venv; . venv/bin/activate
 ```
