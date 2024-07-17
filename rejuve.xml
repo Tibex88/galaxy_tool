@@ -1,6 +1,6 @@
-<tool id="rejuve_service" name="a rejuve service" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
-    
-    <requirements>
+<tool id="rejuve" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
+    <description>A rejuve</description>
+     <requirements>
     </requirements>
 
     <command detect_errors="exit_code"><![CDATA[
