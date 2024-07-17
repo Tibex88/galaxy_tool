@@ -4,7 +4,7 @@
  
 **Run the following commmands**
 
-**Create a virtual machine**
+**create a virtual machine**
 ```bash 
 virtualenv .venv; . venv/bin/activate
 ```
@@ -21,7 +21,7 @@ pip install --upgrade pip
 
 **Install planemo**
 
-Planemo is a set of Command-line utilities to assist in developing Galaxy and Common Workflow Language artifacts - including tools, workflows, and training materials.  https://planemo.readthedocs.io/en/latest/readme.html
+Planemo is a set of Command-line utilities to assist in developing Galaxy and Common Workflow Language artifacts - including tools, workflows, and training materials.
 ```bash 
 pip install planemo 
 ```
