@@ -1,0 +1,45 @@
+<tool id="rej" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
+    <requirements>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+    python '$__tool_directory__/service.py'
+    --d sdfs
+    --str sdf
+    --file sdf
+    --bool true
+    > '$out'
+    ]]></command>
+
+    <inputs>
+         <param type="directory_uri" name="directory_uri" label="Directory URI" /> -->
+        <param type="boolean" name="bool" label="Boolean" />
+        <!-- 
+        <param type="data" format="data" name="infile" label="Input dataset" />
+        <param type="text" format="data" name="str" label="Text" />
+
+        <param type="select" name="select" label="Database">
+            <option value="hg18">Human (hg18)</option>
+            <option value="dm3">Fly (dm3)</option>
+        </param>
+
+         <param type="data_collection" name="data_collection" label="Input Collection" />
+
+        
+        <param type="rules" name="rules" data_ref="input" label="Rules" />
+
+        <param type="integer" name="integer" data_ref="input" label="Rules" />
+
+        <param type="file" name="file" />
+
+        <param type="float" name="float" min="7.8" max="9.5" value="9" /> -->
+
+    </inputs>
+
+    <outputs>
+     <data name="out" format="txt" label="Export logs"/>
+    </outputs>
+
+    <help><![CDATA[
+    TODO: Fill in help.
+    ]]></help>
+</tool>

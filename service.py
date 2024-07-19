@@ -5,7 +5,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
     args = _parser().parse_args(argv)
-    print(args.d,args.str, args.file, args.bool, args.select)
+    print(args.d,args.str, args.file, args.bool)
     exit_code = 0
     sys.exit(exit_code)
     
