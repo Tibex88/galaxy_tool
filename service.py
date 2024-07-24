@@ -6,9 +6,9 @@ def main(argv=None):
         argv = sys.argv[1:]
     args = _parser().parse_args(argv)
     # print(args.d,args.str, args.file, args.bool)
-    # print("Query: ",type(args.query))
-    # print("Query: ",type(args.query[0]))
-    # print("Query: ",(args.query[0]))
+    print("Query: ",type(args.query))
+    print("Query: ",type(args.query[0]))
+    print("Query: ",(args.query[0]))
     print("Query: ",(args.query))
     print("Prompt: ",args.prompt)
     exit_code = 0

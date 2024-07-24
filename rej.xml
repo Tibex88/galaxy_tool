@@ -5,9 +5,17 @@
     <command detect_errors="exit_code"><![CDATA[
     python '$__tool_directory__/service.py'
     #if $service.select == 'qb'
+    
+    ## Doesnt work
+    #set $queries = [$value for $index, $value in enumerate($service.nodes)]
+    -query $queries
+
+    #* comment  --works
     #for $i, $s in enumerate($service.nodes)
-    -query '{id:${s.id},type:${s.type},properties:${s.properties},}'
+    -query {id:${s.id},type:${s.type},properties:${s.properties}}
     #end for
+    *#
+
     #elif $service.select == 'nl'
         -prompt $service.prompt
     #end if
