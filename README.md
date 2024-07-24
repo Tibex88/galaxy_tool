@@ -6,12 +6,12 @@
 
 **create a virtual machine**
 ```bash 
-virtualenv .venv; . venv/bin/activate
+virtualenv .venv; . .venv/bin/activate
 ```
 
 **Activate the virtual environment if it hasn't been already**
 ```bash 
-source venv/bin/activate 
+source .venv/bin/activate 
 ```
 
 **Upgrade pip if needed.**
@@ -28,11 +28,11 @@ pip install planemo
 
 **Afterwards to run the server run**
 ```bash
- planemo s 
+ planemo s
  ```
  Or
  ```bash
- planemo serve 
+ planemo serve
  ```
 Planemo will download and configure a disposable Galaxy instance before running the server if you want to avoid that, clone the following repository 
 
