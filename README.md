@@ -4,6 +4,27 @@
  
 **Run the following commmands**
 
+**Requirements**
+- Node and npm
+- Yarn version 1*
+
+***Installation for yarn**
+```bash
+npm i --global yarn
+```
+
+```bash
+npm set version classic
+```
+
+```bash
+yarn --version
+```
+
+```bash
+npm i --global yarn
+```
+
 **create a virtual machine**
 ```bash 
 virtualenv .venv; . .venv/bin/activate
