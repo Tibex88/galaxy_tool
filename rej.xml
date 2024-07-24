@@ -1,37 +1,52 @@
 <tool id="rej" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
     <requirements>
     </requirements>
+ 
     <command detect_errors="exit_code"><![CDATA[
     python '$__tool_directory__/service.py'
-    --d sdfs
-    --str sdf
-    --file sdf
-    --bool true
+    #if $service.select == 'qb'
+    #for $i, $s in enumerate($service.nodes)
+    -query '{id:${s.id},type:${s.type},properties:${s.properties},}'
+    #end for
+    #elif $service.select == 'nl'
+        -prompt $service.prompt
+    #end if
     > '$out'
     ]]></command>
 
     <inputs>
-         <param type="directory_uri" name="directory_uri" label="Directory URI" /> -->
-        <param type="boolean" name="bool" label="Boolean" />
-        <!-- 
-        <param type="data" format="data" name="infile" label="Input dataset" />
-        <param type="text" format="data" name="str" label="Text" />
 
-        <param type="select" name="select" label="Database">
-            <option value="hg18">Human (hg18)</option>
-            <option value="dm3">Fly (dm3)</option>
-        </param>
+        <conditional name="service">
 
-         <param type="data_collection" name="data_collection" label="Input Collection" />
+            <param type="select" name="select" label="Service">
+                    <option value="qb">Query Builder</option>
+                    <option value="nl">Prompt</option>
+            </param>
 
-        
-        <param type="rules" name="rules" data_ref="input" label="Rules" />
+            <when value="nl">
+                <param type="text" format="data" name="prompt" label="Text" />
+            </when>
 
-        <param type="integer" name="integer" data_ref="input" label="Rules" />
+            <when value="qb">                             
+                <repeat name="nodes">
+                        <param type="text" format="str"  name="id" label="Id" />
+                        
+                        <param type="text" format="str" name="type" label="Type" />
+                                
+                        <param type="text" format="str" name="properties" label="Properties" />      
+                </repeat>
 
-        <param type="file" name="file" />
+                <!-- <repeat name="Edges">
+                    <param type="text" format="str"  name="type" label="Type" />
+                        
+                    <param type="text" format="str" name="source" label="Source" />
+                            
+                    <param type="text" format="str" name="target" label="Target" /> 
+                </repeat> -->
+                
+            </when>
 
-        <param type="float" name="float" min="7.8" max="9.5" value="9" /> -->
+        </conditional>
 
     </inputs>
 
