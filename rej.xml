@@ -3,21 +3,40 @@
     </requirements>
  
     <command detect_errors="exit_code"><![CDATA[
-    python '$__tool_directory__/service.py'
+    python '$__tool_directory__/args.py'
     #if $service.select == 'qb'
-    
-    ## Doesnt work
-    #set $queries = [$value for $index, $value in enumerate($service.nodes)]
-    -query $queries
 
-    #* comment  --works
-    #for $i, $s in enumerate($service.nodes)
-    -query {id:${s.id},type:${s.type},properties:${s.properties}}
-    #end for
-    *#
+        ## get nodes
+        #set $nodes = ''
+        #set $nodes_str = " ".join(['"%s"' % (",".join([str($node.id),str($node.type),str($node.properties),])) for $node in $service.nodes])
+        --nodes  $nodes_str
 
+        #*
+        #set $nodes = []
+        #for $index, $value in enumerate($service.nodes)
+            #set $field = {}
+            $field.append(str($value.id))
+            $field.append(str($value.type))
+            $field.append(str($value.properties))
+            #set $dummy = $nodes.append(str($field))
+        #end for
+        *#
+        #* wont take id as a key
+        #set $nodes = []
+        #for $index, $value in enumerate($service.nodes)
+            #set $field = {}
+
+            $field["id"]=${value.id}
+            $field["type"]=${value.type}
+            $field["properties"]=${value.properties}
+            
+            #set $dummy = $nodes.append(str($field))
+        #end for
+        *#
+        ## #set $result_string = ", ".join($nodes)
+        ## -query $result_string
     #elif $service.select == 'nl'
-        -prompt $service.prompt
+    -prompt $service.prompt
     #end if
     > '$out'
     ]]></command>

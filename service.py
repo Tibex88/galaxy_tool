@@ -19,7 +19,7 @@ def _parser():
     # parser.add_argument("-d", type=str, help="directory target URI")
     # parser.add_argument("-str", type=str, help="file sources json")
     # parser.add_argument("-file", type=str, help="files to export")
-    parser.add_argument("-prompt", type=str, help="NL prompt", default='No prompt')
+    parser.add_argument("-prompt", type=object, help="NL prompt", default='No prompt')
     parser.add_argument("-query",nargs='+' , type=str, help="list of arguments", default='No query')
     # parser.add_argument("-select", type=str, help="select type")
     return parser
