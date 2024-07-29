@@ -59,7 +59,7 @@ def _parser():
     # Argument Parsing Setup
     parser = argparse.ArgumentParser(description="Process nodes and edges.")
     parser.add_argument('--nodes', nargs='+', action=NodeAction, help='List of nodes in the format type,id,property1,property2,...')
-    parser.add_argument('--edges', nargs='+', action=EdgeAction, help='List of edges in the format source,target,type', default="No edges")
+    parser.add_argument('--edges', nargs='+', action=EdgeAction, help='List of edges in the format source,target,type')
 
     return parser
 
@@ -73,8 +73,8 @@ def main(argv=None):
 
     print("Nodes: ",type(args.nodes))
     print("Edges: ",type(args.edges))
-    # print("Nodes: ",(args.nodes))
-    # print("Edges: ",(args.edges))
+    print("Nodes: ",(args.nodes))
+    print("Edges: ",(args.edges))
     exit_code = 0
     sys.exit(exit_code)
 

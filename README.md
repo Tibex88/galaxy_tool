@@ -69,3 +69,10 @@ then run
 ```bash
 planemo serve --galaxy_root="PATH_TO_GALAXY_REPO"
 ```
+
+**Format of nodes and edges expected by the CLI**
+
+
+```bash
+python script.py --nodes "type1,id1,prop1,prop2" "type2,id2,prop3" --edges "id1,id2,edgeType"
+```

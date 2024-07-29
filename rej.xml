@@ -7,9 +7,23 @@
     #if $service.select == 'qb'
 
         ## get nodes
+        #if $service.nodes
         #set $nodes = ''
-        #set $nodes_str = " ".join(['"%s"' % (",".join([str($node.id),str($node.type),str($node.properties),])) for $node in $service.nodes])
+        ## TODO: add an implicit key value iterator 
+        #set $nodes_str = " ".join(['"%s"' % (",".join([str($node.id),str($node.type),str($node.properties)])) for $node in $service.nodes])
         --nodes  $nodes_str
+        #end if
+
+        ## get edges
+        #if $service.edges
+        #set $edges = ''
+        #set $edges_str = " ".join(['"%s"' % (",".join([str($edge.source),str($edge.type),str($edge.target)])) for $edge in $service.edges])
+        --edges  $edges_str
+        #end if
+
+        #elif $service.select == 'nl'
+        -prompt $service.prompt
+        #end if
 
         #*
         #set $nodes = []
@@ -35,9 +49,7 @@
         *#
         ## #set $result_string = ", ".join($nodes)
         ## -query $result_string
-    #elif $service.select == 'nl'
-    -prompt $service.prompt
-    #end if
+
     > '$out'
     ]]></command>
 
@@ -63,13 +75,13 @@
                         <param type="text" format="str" name="properties" label="Properties" />      
                 </repeat>
 
-                <!-- <repeat name="Edges">
+                <repeat name="edges">
                     <param type="text" format="str"  name="type" label="Type" />
                         
                     <param type="text" format="str" name="source" label="Source" />
                             
                     <param type="text" format="str" name="target" label="Target" /> 
-                </repeat> -->
+                </repeat>
                 
             </when>
 
