@@ -71,10 +71,40 @@ def main(argv=None):
     # print("Nodes:", args.nodes)
     # print("Edges:", args.edges)
 
-    print("Nodes: ",type(args.nodes))
-    print("Edges: ",type(args.edges))
-    print("Nodes: ",(args.nodes))
-    print("Edges: ",(args.edges))
+    print(
+        #!json
+
+{
+  "nodes":[
+			{
+				"id": 1,
+                          "source_node": "gene ENSG00000101349",
+          "source_url": "https://www.gencodegenes.org/human/",
+          "target_node": "transcript ENST00000378423"
+
+			},
+			{
+				"id": 2,
+                          "source_node": "gene ENSG00000101349",
+          "source_url": "https://www.gencodegenes.org/human/",
+          "target_node": "transcript ENST00000378423"
+
+			}
+          ],
+ "links":[
+			
+			{
+				"source":1,
+				"target":2,
+			}
+         ]
+}
+
+    )
+    # print("Nodes: ",type(args.nodes))
+    # print("Edges: ",type(args.edges))
+    # print("Nodes: ",(args.nodes))
+    # print("Edges: ",(args.edges))
     exit_code = 0
     sys.exit(exit_code)
 
