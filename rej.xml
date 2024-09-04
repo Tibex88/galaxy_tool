@@ -71,12 +71,21 @@
 
             <when value="qb">
 
-            <param type="select" name="selector" label="Templates">
-                    <option value="default">Use a visualizer</option>
-                    <option value="one">Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
-                    <option value="two">For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
-                    <option value="three">Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
-            </param>
+                <repeat name="nodes">
+                        <param type="text" format="str"  name="id" label="Id" />
+                        
+                        <param type="text" format="str" name="type" label="Type" />
+                                
+                        <param type="text" format="str" name="properties" label="Properties" />      
+                </repeat>
+
+                <repeat name="edges">
+                    <param type="text" format="str"  name="type" label="Type" />
+                        
+                    <param type="text" format="str" name="source" label="Source" />
+                            
+                    <param type="text" format="str" name="target" label="Target" /> 
+                </repeat>
         
 
                 
