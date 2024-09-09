@@ -3,27 +3,22 @@
     </requirements>
  
     <command detect_errors="exit_code"><![CDATA[
-    python '$__tool_directory__/args.py'
+    python '$__tool_directory__/service.py'
     #if $service.select == 'qb'
+        ## #set $query = ""
 
-        ## get nodes
-        #if $service.nodes
-        #set $nodes = ''
-        ## TODO: add an implicit key value iterator 
-        #set $nodes_str = " ".join(['"%s"' % (",".join([str($node.id),str($node.type),str($node.properties)])) for $node in $service.nodes])
-        --nodes  $nodes_str
-        #end if
+        ## #if $service.templates == 'one'
+        ##     $query = 'one'
+        ## #elif $service.templates == 'one'
+        ##     $query = 'two'
+        ## #elif $service.templates == 'one'
+        ##     $query = 'three'
+        ## #end if
+          -query = $service.template 
 
-        ## get edges
-        #if $service.edges
-        #set $edges = ''
-        #set $edges_str = " ".join(['"%s"' % (",".join([str($edge.source),str($edge.type),str($edge.target)])) for $edge in $service.edges])
-        --edges  $edges_str
-        #end if
-
-        #elif $service.select == 'nl'
-        -prompt $service.prompt
-        #end if
+    #elif $service.select == 'nl'
+          -prompt $service.prompt
+    #end if
 
         #*
         #set $nodes = []
@@ -55,7 +50,7 @@
 
     <inputs>
 
-            <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" />
+            <!-- <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" /> -->
 
         <conditional name="service">
 
@@ -65,21 +60,19 @@
             </param>
 
             <when value="nl">
-                <param type="text" format="data" name="prompt" label="Text" />
+                <param type="text" format="data" name="prompt" label="Enter your prompt" />
             </when>
 
 
             <when value="qb">
 
-            <param type="select" name="selector" label="Templates">
-                    <option value="default">Use a visualizer</option>
-                    <option value="one">Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
-                    <option value="two">For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
-                    <option value="three">Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
+            <param type="select" name="template" label="Pick a template">
+                    <option value="0">Use a visualizer</option>
+                    <option value='1'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
+                    <option value='2'>For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
+                    <option value='3'>Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
             </param>
         
-
-                
             </when>
 
         </conditional>
@@ -87,7 +80,7 @@
     </inputs>
 
     <outputs>
-     <data name="out" format="txt" label="Export logs"/>
+     <data name="out" format="json" label="Export logs"/>
     </outputs>
 
     <help><![CDATA[
