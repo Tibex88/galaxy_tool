@@ -50,9 +50,12 @@
 
     <inputs>
 
+        
+        <param name="input_json" type="data" optional="true" format="json" label="Query JSON" help="Use the QB visualizer to create a JSON"/>
+        <param name="input_text" type="text" format="data" label="Query Prompt" help="Ask a question"/>
             <!-- <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" /> -->
 
-        <conditional name="service">
+        <!-- <conditional name="service">
 
             <param type="select" name="select" label="Service">
                     <option value="qb">Query Builder</option>
@@ -75,7 +78,7 @@
         
             </when>
 
-        </conditional>
+        </conditional> -->
 
     </inputs>
 
