@@ -5,88 +5,84 @@
     <command detect_errors="exit_code"><![CDATA[
     python '$__tool_directory__/service.py'
     #if $service.select == 'qb'
-        ## #set $query = ""
-
-        ## #if $service.templates == 'one'
-        ##     $query = 'one'
-        ## #elif $service.templates == 'one'
-        ##     $query = 'two'
-        ## #elif $service.templates == 'one'
-        ##     $query = 'three'
-        ## #end if
-          -query = $service.template 
-
+        -template = $service.template 
+          
     #elif $service.select == 'nl'
-          -prompt $service.prompt
+        -prompt $service.prompt
+
+    #elif $service.select == 'json'
+        -json $service.json
+
     #end if
-
-        #*
-        #set $nodes = []
-        #for $index, $value in enumerate($service.nodes)
-            #set $field = {}
-            $field.append(str($value.id))
-            $field.append(str($value.type))
-            $field.append(str($value.properties))
-            #set $dummy = $nodes.append(str($field))
-        #end for
-        *#
-        #* wont take id as a key
-        #set $nodes = []
-        #for $index, $value in enumerate($service.nodes)
-            #set $field = {}
-
-            $field["id"]=${value.id}
-            $field["type"]=${value.type}
-            $field["properties"]=${value.properties}
-            
-            #set $dummy = $nodes.append(str($field))
-        #end for
-        *#
-        ## #set $result_string = ", ".join($nodes)
-        ## -query $result_string
-
     > '$out'
     ]]></command>
 
     <inputs>
 
-        
-        <param name="input_json" type="data" optional="true" format="json" label="Query JSON" help="Use the QB visualizer to create a JSON"/>
-        <param name="input_text" type="text" format="data" label="Query Prompt" help="Ask a question"/>
-            <!-- <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" /> -->
-
-        <!-- <conditional name="service">
+        <conditional name="service">
 
             <param type="select" name="select" label="Service">
-                    <option value="qb">Query Builder</option>
-                    <option value="nl">Prompt</option>
+                <option value="qb">Query Builder</option>
+                <option value="nl">Prompt</option>
+                <option value="json">Upload JSON</option>
             </param>
 
             <when value="nl">
-                <param type="text" format="data" name="prompt" label="Enter your prompt" />
+                <param type="text" format="text" name="prompt" label="Enter your prompt" />
             </when>
-
 
             <when value="qb">
-
-            <param type="select" name="template" label="Pick a template">
-                    <option value="0">Use a visualizer</option>
-                    <option value='1'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
-                    <option value='2'>For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
-                    <option value='3'>Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
-            </param>
-        
+                <param type="select" name="template" label="Initialize the visualizer or pick a template">
+                        <option value = '0'>Initialize the visualizer</option>
+                        <option value = '1'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
+                        <option value = '2'>For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
+                        <option value = '3'>Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
+                </param>
             </when>
 
-        </conditional> -->
+            <when value="json">
+                <param type="data" format="json" name="json" label="Insert a file" />
+            </when>
+
+        </conditional>
 
     </inputs>
 
     <outputs>
-     <data name="out" format="json" label="Export logs"/>
+     <data name="out" format="json" label="Annotaiton Service Output"/>
     </outputs>
 
     <help><![CDATA[
-    TODO: Fill in help.
+
+**What does this tool do?**
+
+
+**Services/Inputs**
+
+1, Natural Language
+
+2, Use a visualizer to build a query or select from templates  
+ https://goeckslab.github.io/Galaxy-ML/APIs/keras-galaxy-models/#kerasgbatchclassifier
+
+3, JSON file
+
+**Output**
+JSON format  
+
+.. class:: infomark
+**TIP:**  **Steps to Initialize the visualizer**
+
+**Step 1** Choose the Query BUilder as a service
+
+**Step 2** Choose the Initialize the Visualizer option
+
+**Step 3** Then run the tool, this will load a JSON file into the history which you can use in the query builder
+
+**Step 4** Choose the visualize option on the history
+
+**Step 5** And open the visualizer with the name QB
+
+This will start the visualizer which you can use to build queries which will run it in this tool and give you the output
+
     ]]></help>
 </tool>
