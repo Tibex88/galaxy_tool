@@ -1,9 +1,8 @@
 import argparse
 import sys
-import json
 
 
-query = {
+sample_query = {
   "nodes": [
     {
       "id": "8cc0bd89-7f53-4e89-aab4-cbac132be68b",
@@ -183,27 +182,40 @@ query = {
 }
 
 def main(argv=None):
-    if argv is None:
-        argv = sys.argv[1:]
-    args = _parser().parse_args(argv)
-    # print(args.d,args.str, args.file, args.bool)
-    # print("Query: ",type(args.query))
-    # print("Query: ",type(args.query[1]))
-    # # print("Query: ",(args.query[0]))
-    # print("Query: ",type(args.query[1]))
-    # print("Prompt: ",args.prompt)
-    print(json.dumps(query))
-    exit_code = 0
-    sys.exit(exit_code)
+  if argv is None:
+      argv = sys.argv[1:]
+  args = _parser().parse_args(argv)
+
+
+  if args.template is not None:
+    # insert logic
+    template = args.template[1]
+    print(template)
+    return 1
+  elif args.prompt is not None:
+  # insert logic
+    prompt = args.prompt
+    print(prompt)
+    return 1
+  elif args.json is not None:
+  # insert logic
+    json = args.json
+    print(json)
+    return 1
+  else:
+    print("No template or prompt provided")
+
+    
+  exit_code = 0
+  sys.exit(exit_code)
 
 def _parser():
     parser = argparse.ArgumentParser()
-    # parser.add_argument("-d", type=str, help="directory target URI")
-    # parser.add_argument("-str", type=str, help="file sources json")
-    # parser.add_argument("-file", type=str, help="files to export")
-    parser.add_argument("-prompt", type=str, help="NL prompt", default='No prompt')
-    parser.add_argument("-query",nargs='+' , type=str, help="list of arguments", default='No query')
-    # parser.add_argument("-select", type=str, help="select type")
+
+    parser.add_argument("-prompt", type=str, help="Natural Language prompt for the program", default=None)
+    parser.add_argument("-template",nargs='+', type=str, help="Index for query templates", default=None)
+    parser.add_argument("-json", type=str, help="Path to a JSON file containing the source data", default=None)    # parser.add_argument("-select", type=str, help="select type")
+    
     return parser
 
 
