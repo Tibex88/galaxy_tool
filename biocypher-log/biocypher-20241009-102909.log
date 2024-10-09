@@ -1,0 +1,8 @@
+2024-10-09 10:29:09,580	INFO	module:_logger
+This is BioCypher v0.6.0.
+2024-10-09 10:29:09,653	INFO	module:_logger
+Logging into `biocypher-log/biocypher-20241009-102909.log`.
+2024-10-09 10:29:09,656	DEBUG	module:_get
+Loading module biocypher._get.
+2024-10-09 10:29:11,538	DEBUG	module:_misc
+Loading module biocypher._misc.

@@ -1,0 +1,24 @@
+2024-10-03 16:41:15,953	INFO	module:_logger
+This is BioCypher v0.6.0.
+2024-10-03 16:41:15,953	INFO	module:_logger
+Logging into `biocypher-log/biocypher-20241003-164115.log`.
+2024-10-03 16:41:15,954	DEBUG	module:_get
+Loading module biocypher._get.
+2024-10-03 16:41:15,989	DEBUG	module:_misc
+Loading module biocypher._misc.
+2024-10-03 16:41:17,306	DEBUG	module:_core
+Loading module biocypher._core.
+2024-10-03 16:41:17,307	DEBUG	module:_create
+Loading module biocypher._create.
+2024-10-03 16:41:17,313	DEBUG	module:_mapping
+Loading module biocypher._mapping.
+2024-10-03 16:41:17,315	DEBUG	module:_ontology
+Loading module biocypher._ontology.
+2024-10-03 16:41:17,438	DEBUG	module:_translate
+Loading module biocypher._translate.
+2024-10-03 16:41:17,440	DEBUG	module:_deduplicate
+Loading module biocypher._deduplicate.
+2024-10-03 16:41:17,451	DEBUG	module:_get_writer
+Loading module biocypher.output.write._get_writer.
+2024-10-03 16:41:17,452	DEBUG	module:_neo4j_driver
+Loading module biocypher.output.connect._neo4j_driver.

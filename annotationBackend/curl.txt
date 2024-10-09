@@ -1,0 +1,117 @@
+curl.exe GET http://localhost:5000/nodes 
+
+curl.exe GET http://localhost:5000/edges
+
+curl.exe GET http://localhost:5000/relations/gene
+
+$jsonData = @"
+{
+  "requests": {
+    "nodes": [
+      {
+        "node_id": "n1",
+        "id": "",
+        "type": "gene",
+        "properties": {}
+      },
+      {
+        "node_id": "n2",
+        "id": "",
+        "type": "transcript",
+        "properties": {}
+      },
+      {
+        "node_id": "n3",
+        "id": "",
+        "type": "protein",
+        "properties": {
+          "protein_name": "MKKS"
+        }
+      },
+      {
+        "node_id": "n4",
+        "id": "",
+        "type": "protein",
+        "properties": {
+          "protein_name": "MKKS"
+        }
+      }
+    ],
+    "predicates": [
+      {
+        "type": "transcribed to",
+        "source": "n1",
+        "target": "n2"
+      },
+      {
+        "type": "translates to",
+        "source": "n2",
+        "target": "n3"
+      }
+    ]
+  }
+}
+"@
+
+Invoke-RestMethod -Uri "http://localhost:5000/query" -Method Post -ContentType "application/json" -Body $jsonData
+
+
+
+$jsonData = @"
+{
+  "requests": {
+    "nodes": [
+      {
+        "node_id": "n1",
+        "id": "",
+        "type": "gene",
+        "properties": {
+          "gene_type": "protein_coding"
+        }
+      },
+      {
+        "node_id": "n2",
+        "id": "",
+        "type": "transcript",
+        "properties": {}
+      },
+      {
+        "node_id": "n3",
+        "id": "",
+        "type": "protein",
+        "properties": {
+          "protein_name": "ANKE1"
+        }
+      }
+    ],
+    "predicates": [
+      {
+        "type": "transcribed to",
+        "source": "n1",
+        "target": "n2"
+      }
+    ]
+  }
+}
+"@
+
+Invoke-RestMethod -Uri "http://localhost:5000/query" -Method Post -ContentType "application/json" -Body $jsonData
+
+
+curl.exe --location 'http://localhost:5000/query' --header 'Content-Type: application/json' --data '{
+  "requests": {
+    "nodes": [
+      {
+        "node_id": "n1",
+        "id": "",
+        "type": "gene",
+        "properties": {
+          "gene_type": "protein_coding"
+        }
+      }
+    ],
+    "predicates": []
+  }
+}'
+
+

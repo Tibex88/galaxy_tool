@@ -1,0 +1,26 @@
+2024-10-09 10:30:25,977	INFO	module:_logger
+This is BioCypher v0.6.0.
+2024-10-09 10:30:25,978	INFO	module:_logger
+Logging into `biocypher-log/biocypher-20241009-103025.log`.
+2024-10-09 10:30:25,979	DEBUG	module:_get
+Loading module biocypher._get.
+2024-10-09 10:30:26,046	DEBUG	module:_misc
+Loading module biocypher._misc.
+2024-10-09 10:30:44,883	DEBUG	module:_core
+Loading module biocypher._core.
+2024-10-09 10:30:44,926	DEBUG	module:_create
+Loading module biocypher._create.
+2024-10-09 10:30:44,978	DEBUG	module:_mapping
+Loading module biocypher._mapping.
+2024-10-09 10:30:44,990	DEBUG	module:_ontology
+Loading module biocypher._ontology.
+2024-10-09 10:30:48,066	DEBUG	module:_translate
+Loading module biocypher._translate.
+2024-10-09 10:30:48,085	DEBUG	module:_deduplicate
+Loading module biocypher._deduplicate.
+2024-10-09 10:30:48,554	DEBUG	module:_get_writer
+Loading module biocypher.output.write._get_writer.
+2024-10-09 10:30:48,784	DEBUG	module:_neo4j_driver
+Loading module biocypher.output.connect._neo4j_driver.
+2024-10-09 10:30:54,743	INFO	module:_core
+Running BioCypher with schema configuration from /mnt/c/users/kidus/desktop/project files/galaxy_tibebe/galaxy_tool/annotationBackend/app/../config/schema_config.yaml.

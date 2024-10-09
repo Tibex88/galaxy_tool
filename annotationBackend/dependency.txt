@@ -1,0 +1,5 @@
+Redis as a user stat logger, redis password
+Bloom api key
+openai Api Key
+base url of OpenAI API (vectorstore.py)
+openai proxy (optional)

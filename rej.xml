@@ -1,0 +1,89 @@
+<tool id="rej" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
+    <requirements>
+    </requirements>
+ 
+    <command detect_errors="exit_code"><![CDATA[
+    python '$__tool_directory__/service.py'
+    #if $service.select == 'qb'
+        ## #set $query = ""
+
+        ## #if $service.templates == 'one'
+        ##     $query = 'one'
+        ## #elif $service.templates == 'one'
+        ##     $query = 'two'
+        ## #elif $service.templates == 'one'
+        ##     $query = 'three'
+        ## #end if
+          -query = $service.template 
+
+    #elif $service.select == 'nl'
+          -prompt $service.prompt
+    #end if
+
+        #*
+        #set $nodes = []
+        #for $index, $value in enumerate($service.nodes)
+            #set $field = {}
+            $field.append(str($value.id))
+            $field.append(str($value.type))
+            $field.append(str($value.properties))
+            #set $dummy = $nodes.append(str($field))
+        #end for
+        *#
+        #* wont take id as a key
+        #set $nodes = []
+        #for $index, $value in enumerate($service.nodes)
+            #set $field = {}
+
+            $field["id"]=${value.id}
+            $field["type"]=${value.type}
+            $field["properties"]=${value.properties}
+            
+            #set $dummy = $nodes.append(str($field))
+        #end for
+        *#
+        ## #set $result_string = ", ".join($nodes)
+        ## -query $result_string
+
+    > '$out'
+    ]]></command>
+
+    <inputs>
+
+            <!-- <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" /> -->
+
+        <conditional name="service">
+
+            <param type="select" name="select" label="Service">
+                    <option value="qb">Query Builder</option>
+                    <option value="nl">Prompt</option>
+            </param>
+
+            <when value="nl">
+                <param type="text" format="data" name="prompt" label="Enter your prompt" />
+            </when>
+
+
+            <when value="qb">
+
+            <param type="select" name="template" label="Pick a template">
+                    <option value="0">Use a visualizer</option>
+                    <option value='1'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
+                    <option value='2'>For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
+                    <option value='3'>Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
+            </param>
+        
+            </when>
+
+        </conditional>
+
+    </inputs>
+
+    <outputs>
+     <data name="out" format="json" label="Export logs"/>
+    </outputs>
+
+    <help><![CDATA[
+    TODO: Fill in help.
+    ]]></help>
+</tool>
