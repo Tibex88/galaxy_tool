@@ -1,4 +1,4 @@
-from llama_index.llms.ollama import Ollama
+# from llama_index.llms.ollama import Ollama
 from together import Together
 from dotenv import load_dotenv
 import json
@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-base_url = os.getenv('BASE_URL')
+# base_url = os.getenv('BASE_URL')
 
 def generate_json_request(user_question):
     prompt = f'''

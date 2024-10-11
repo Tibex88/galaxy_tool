@@ -1,14 +1,9 @@
-from flask import Flask, request, jsonify, Response
 import logging
 import json
 import yaml
 import os
-from .initialize import app, databases, schema_manager
+from .initialize import databases, schema_manager
 from .lib.validator import validate_request
-from flask_cors import CORS
-
-CORS(app)
-
 # Setup basic logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -27,21 +22,6 @@ def load_config():
         raise
 
 config = load_config()
-
-@app.route('/nodes', methods=['GET'])
-def get_nodes_endpoint():
-    nodes = json.dumps(schema_manager.get_nodes(), indent=4)
-    return Response(nodes, mimetype='application/json')
-
-@app.route('/edges', methods=['GET'])
-def get_edges_endpoint():
-    edges = json.dumps(schema_manager.get_edges(), indent=4)
-    return Response(edges, mimetype='application/json')
-
-@app.route('/relations/<node_label>', methods=['GET'])
-def get_relations_for_node_endpoint(node_label):
-    relations = json.dumps(schema_manager.get_relations_for_node(node_label), indent=4)
-    return Response(relations, mimetype='application/json')
 
 def process_query(query):
 

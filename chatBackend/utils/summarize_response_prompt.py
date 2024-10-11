@@ -1,4 +1,4 @@
-from llama_index.llms.ollama import Ollama
+# from llama_index.llms.ollama import Ollama
 from together import Together
 import os
 from dotenv import load_dotenv
