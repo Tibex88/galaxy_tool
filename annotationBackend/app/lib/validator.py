@@ -1,10 +1,10 @@
 def validate_request(request, schema):
 
-    print(type(request[0]))
+    print(type(request))
     if 'nodes' not in request:
         raise Exception("node is missing")
 
-    nodes = request[0]['nodes']
+    nodes = request['nodes']
     # validate nodes
     if not isinstance(nodes, list):
         raise Exception("nodes should be a list")
