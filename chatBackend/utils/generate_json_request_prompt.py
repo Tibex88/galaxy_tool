@@ -55,7 +55,8 @@ def generate_json_request(user_question):
     Here is an example of a natural language query: "What are the proteins that gene ENSG00000133710 codes for?"
 
     Your task is to convert the given natural language query into the corresponding JSON request format. Ensure the JSON request accurately reflects the information provided in the query, including the appropriate node types and relationships between them.
-
+     
+    required fields are node_id in the nodes object for each node, so generate a random but unique strings for all of the nodes you make
     Example Output:
 
     {{
@@ -119,6 +120,6 @@ def generate_json_request(user_question):
     for chunk in stream:
       response += chunk.choices[0].delta.content or ""
 
-    print(response)
+    print("response",response)
     return json.loads(response)['requests']
 

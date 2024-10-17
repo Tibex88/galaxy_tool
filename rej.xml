@@ -1,57 +1,66 @@
 <tool id="rej" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
     <requirements>
-        <requirement type="module">biocypher</requirement>
     </requirements>
+
  
     <command detect_errors="exit_code"><![CDATA[
-    python '$__tool_directory__/service.py'
-    #if $service.select == 'qb'
-        ## #set $query = ""
+    ##list packages in the environment
+    ## #import pkg_resources
 
-        ## #if $service.templates == 'one'
-        ##     $query = 'one'
-        ## #elif $service.templates == 'one'
-        ##     $query = 'two'
-        ## #elif $service.templates == 'one'
-        ##     $query = 'three'
-        ## #end if
-          -query = $service.template 
+    ## #set $installed_packages = $pkg_resources.working_set
 
-    #elif $service.select == 'nl'
-          -prompt $service.prompt
-    #end if
+    ## #for $package in $sorted($installed_packages, key=lambda p: p.project_name.lower())
+    ## $package.project_name==$package.version
+    ## #end for
+    ##list packages in the environment
 
-        #*
-        #set $nodes = []
-        #for $index, $value in enumerate($service.nodes)
-            #set $field = {}
-            $field.append(str($value.id))
-            $field.append(str($value.type))
-            $field.append(str($value.properties))
-            #set $dummy = $nodes.append(str($field))
-        #end for
-        *#
-        #* wont take id as a key
-        #set $nodes = []
-        #for $index, $value in enumerate($service.nodes)
-            #set $field = {}
 
-            $field["id"]=${value.id}
-            $field["type"]=${value.type}
-            $field["properties"]=${value.properties}
+    ## python3 '$__tool_directory__/service.py'
+    ## #if $service.select == 'qb'
+    ##     ## #set $query = ""
+
+    ##     ## #if $service.templates == 'one'
+    ##     ##     $query = 'one'
+    ##     ## #elif $service.templates == 'one'
+    ##     ##     $query = 'two'
+    ##     ## #elif $service.templates == 'one'
+    ##     ##     $query = 'three'
+    ##     ## #end if
+    ##       -query = $service.template 
+
+    ## #elif $service.select == 'nl'
+    ##       -prompt $service.prompt
+    ## #end if
+
+    ##     #*
+    ##     #set $nodes = []
+    ##     #for $index, $value in enumerate($service.nodes)
+    ##         #set $field = {}
+    ##         $field.append(str($value.id))
+    ##         $field.append(str($value.type))
+    ##         $field.append(str($value.properties))
+    ##         #set $dummy = $nodes.append(str($field))
+    ##     #end for
+    ##     *#
+    ##     #* wont take id as a key
+    ##     #set $nodes = []
+    ##     #for $index, $value in enumerate($service.nodes)
+    ##         #set $field = {}
+
+    ##         $field["id"]=${value.id}
+    ##         $field["type"]=${value.type}
+    ##         $field["properties"]=${value.properties}
             
-            #set $dummy = $nodes.append(str($field))
-        #end for
-        *#
-        ## #set $result_string = ", ".join($nodes)
-        ## -query $result_string
+    ##         #set $dummy = $nodes.append(str($field))
+    ##     #end for
+    ##     *#
+    ##     ## #set $result_string = ", ".join($nodes)
+    ##     ## -query $result_string
 
     > '$out'
     ]]></command>
 
     <inputs>
-
-            <!-- <param name="GALAXY_URL" type="baseurl" value="/tool_runner/biomart" /> -->
 
         <conditional name="service">
 
@@ -81,7 +90,7 @@
     </inputs>
 
     <outputs>
-     <data name="out" format="json" label="Export logs"/>
+     <data name="out" format="txt" label="Export logs"/>
     </outputs>
 
     <help><![CDATA[

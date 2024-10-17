@@ -195,7 +195,7 @@ def main(argv=None):
     # print("Prompt: ",args.prompt)
     # print(json.dumps(query))
 
-    response = send_request(args.prompt, query)
+    response = send_request(args.prompt, args.query)
     print(response)
     
     exit_code = 0

@@ -1,6 +1,7 @@
 def validate_request(request, schema):
 
     print(type(request))
+    print(request)
     if 'nodes' not in request:
         raise Exception("node is missing")
 
