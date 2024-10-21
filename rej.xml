@@ -1,10 +1,10 @@
-<tool id="rej" name="rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
+<tool id="rej" name="Rejuve" version="0.1.0+galaxy0" python_template_version="3.5" profile="21.05">
     <requirements>
     </requirements>
 
  
     <command detect_errors="exit_code"><![CDATA[
-    ##list packages in the environment
+    ## list packages in the environment
     ## #import pkg_resources
 
     ## #set $installed_packages = $pkg_resources.working_set
@@ -12,10 +12,10 @@
     ## #for $package in $sorted($installed_packages, key=lambda p: p.project_name.lower())
     ## $package.project_name==$package.version
     ## #end for
-    ##list packages in the environment
+    ## list packages in the environment
 
 
-    ## python3 '$__tool_directory__/service.py'
+    python3 '$__tool_directory__/service.py'
     ## #if $service.select == 'qb'
     ##     ## #set $query = ""
 
@@ -85,12 +85,18 @@
         
             </when>
 
-        </conditional>
+        </conditional> 
 
     </inputs>
 
     <outputs>
-     <data name="out" format="txt" label="Export logs"/>
+        <data name="out" format="txt" label="${tool.name}: txt">
+            <filter>service['select'] == "nl"</filter>
+        </data>
+
+        <data name="json_out" format="json" label="${tool.name}: json">
+            <filter>service['select']  == "qb"</filter>
+        </data>
     </outputs>
 
     <help><![CDATA[
