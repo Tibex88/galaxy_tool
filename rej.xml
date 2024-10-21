@@ -9,16 +9,6 @@
     </stdio>
 
     <command detect_errors="exit_code"><![CDATA[
-    ## list packages in the environment
-    ## #import pkg_resources
-
-    ## #set $installed_packages = $pkg_resources.working_set
-
-    ## #for $package in $sorted($installed_packages, key=lambda p: p.project_name.lower())
-    ## $package.project_name==$package.version
-    ## #end for
-    ## list packages in the environment
-
 
     python3 '$__tool_directory__/service.py'
     #if $service.select == 'qb'
@@ -47,10 +37,10 @@
             <when value="qb">
 
             <param type="select" name="template" label="Pick a template">
-                    <option value="0">Use a visualizer</option>
-                    <option value='1'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
-                    <option value='2'>For a set of co-expressed genes, what transcription factors appear to be controlling their coordinated expression</option>
-                    <option value='3'>Find all promoters and super enhancers associated with genes in a particular biological pathway</option>
+                    <option value="init">Use a visualizer</option>
+                    <option value='gwas'>Find all GWAS variants of a gene that are located in enhancers and identify the associated genes of these enhancers</option>
+                    <option value='gtp'>Find a gene, its transcript, and the associated protein, establishing relationships of transcription and translation.</option>
+                    <option value='pctp'>Find a protein-coding gene, its transcript, and the associated protein (ANKE1), establishing a transcription relationship from the gene to the transcript.</option>
             </param>
         
             </when>
