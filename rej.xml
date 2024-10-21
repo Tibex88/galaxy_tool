@@ -2,7 +2,12 @@
     <requirements>
     </requirements>
 
- 
+    <stdio>
+        <exit_code range=":-2" level="warning" description="Low disk space" />
+        <exit_code range="1:" level="fatal"  />
+        <regex match="Error:"  level="fatal" />
+    </stdio>
+
     <command detect_errors="exit_code"><![CDATA[
     ## list packages in the environment
     ## #import pkg_resources
@@ -16,48 +21,13 @@
 
 
     python3 '$__tool_directory__/service.py'
-    ## #if $service.select == 'qb'
-    ##     ## #set $query = ""
+    #if $service.select == 'qb'
+          -query = $service.template 
 
-    ##     ## #if $service.templates == 'one'
-    ##     ##     $query = 'one'
-    ##     ## #elif $service.templates == 'one'
-    ##     ##     $query = 'two'
-    ##     ## #elif $service.templates == 'one'
-    ##     ##     $query = 'three'
-    ##     ## #end if
-    ##       -query = $service.template 
+    #elif $service.select == 'nl'
+          -prompt $service.prompt
+    #end if
 
-    ## #elif $service.select == 'nl'
-    ##       -prompt $service.prompt
-    ## #end if
-
-    ##     #*
-    ##     #set $nodes = []
-    ##     #for $index, $value in enumerate($service.nodes)
-    ##         #set $field = {}
-    ##         $field.append(str($value.id))
-    ##         $field.append(str($value.type))
-    ##         $field.append(str($value.properties))
-    ##         #set $dummy = $nodes.append(str($field))
-    ##     #end for
-    ##     *#
-    ##     #* wont take id as a key
-    ##     #set $nodes = []
-    ##     #for $index, $value in enumerate($service.nodes)
-    ##         #set $field = {}
-
-    ##         $field["id"]=${value.id}
-    ##         $field["type"]=${value.type}
-    ##         $field["properties"]=${value.properties}
-            
-    ##         #set $dummy = $nodes.append(str($field))
-    ##     #end for
-    ##     *#
-    ##     ## #set $result_string = ", ".join($nodes)
-    ##     ## -query $result_string
-
-    > '$out'
     ]]></command>
 
     <inputs>
@@ -90,13 +60,15 @@
     </inputs>
 
     <outputs>
-        <data name="out" format="txt" label="${tool.name}: txt">
+
+        <data name="json" format="json" label="${tool.name}: qb | json">
+            <filter>service['select']  == "qb"</filter>
+        </data>
+
+        <data name="out" format="txt" label="${tool.name}: nl | txt">
             <filter>service['select'] == "nl"</filter>
         </data>
 
-        <data name="json_out" format="json" label="${tool.name}: json">
-            <filter>service['select']  == "qb"</filter>
-        </data>
     </outputs>
 
     <help><![CDATA[
