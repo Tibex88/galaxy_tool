@@ -16,6 +16,8 @@
 
     #elif $service.select == 'nl'
           -prompt $service.prompt
+    #elif $service.select == 'hg'
+          -hg $service.param1 $service.param2
     #end if
 
     ]]></command>
@@ -27,6 +29,7 @@
             <param type="select" name="select" label="Service">
                     <option value="qb">Query Builder</option>
                     <option value="nl">Prompt</option>
+                    <option value="hg">Hypothesis</option>
             </param>
 
             <when value="nl">
@@ -45,18 +48,30 @@
         
             </when>
 
+            <when value="hg">
+
+                <param type="text" name="param1" label="Input parameter 1 "/>
+                <param type="text" name="param2" label="Input parameter 2"/>
+            
+            </when>
+
         </conditional> 
 
     </inputs>
 
     <outputs>
 
-        <data name="json" format="json" label="${tool.name}: qb | json">
+        <data name="output1" format="json" label="${tool.name}: qb | json">
             <filter>service['select']  == "qb"</filter>
         </data>
 
-        <data name="out" format="txt" label="${tool.name}: nl | txt">
+        <data name="output2" format="txt" label="${tool.name}: nl | txt">
             <filter>service['select'] == "nl"</filter>
+        </data>
+
+
+        <data name="output3" format="json" label="${tool.name}: hg | json">
+            <filter>service['select'] == "hg"</filter>
         </data>
 
     </outputs>

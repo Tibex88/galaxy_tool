@@ -7,9 +7,7 @@ import requests
 
 CHAT_BACKEND_URL = 'https://google.com'
 ANNOTATION_URL = 'http://46.4.115.181:5000/query'
-
-def call_chat_backend(data):
-    return 1
+# ANNOTATION_URL = 'http://100.67.47.42:9999'
 
 def get_template(file_name):
 
@@ -27,6 +25,11 @@ def get_template(file_name):
         query_req = json.load(file)
 
     return query_req
+
+
+def call_chat_backend(data):
+    return 1
+
 
 def call_annotation_service(query):
 
@@ -49,6 +52,7 @@ def main(argv=None):
 
     prompt = args.prompt
     query = args.query
+    hg = args.hg
 
 
     if prompt == "No Prompt" and query == "No query":
@@ -66,6 +70,7 @@ def _parser():
     # parser.add_argument("-file", type=str, help="files to export")
     parser.add_argument("-prompt", type=str, help="NL prompt", default='No prompt')
     parser.add_argument("-query",nargs='+' , type=str, help="list of arguments", default='No query')
+    parser.add_argument("-hg",nargs='+' , type=str, help="list of arguments", default=None)
     return parser
 
 
