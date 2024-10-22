@@ -17,7 +17,7 @@
     #elif $service.select == 'nl'
           -prompt $service.prompt
     #elif $service.select == 'hg'
-          -hg $service.param1 $service.param2
+          -hg $service.snv $service.triat
     #end if
 
     ]]></command>
@@ -50,8 +50,8 @@
 
             <when value="hg">
 
-                <param type="text" name="param1" label="Input parameter 1 "/>
-                <param type="text" name="param2" label="Input parameter 2"/>
+                <param optional="false" type="text" name="snv" label="SNV or Indel"/>
+                <param optional="false" type="text" name="triat" label="Phonotype/ Triat"/>
             
             </when>
 
